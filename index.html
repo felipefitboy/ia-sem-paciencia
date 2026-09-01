@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Escolha uma personalidade, faça sua pergunta e receba uma resposta com humor, ironia e zero paciência. 3 perguntas grátis por dia." />
+  <meta name="theme-color" content="#0b0b10" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="IA Sem Paciência" />
+  <meta property="og:description" content="Pergunte qualquer coisa. Só não reclame da resposta." />
+  <meta property="og:type" content="website" />
+  <title>IA Sem Paciência</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "@relevanceai/sdk": "https://esm.run/@relevanceai/sdk"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">🤖</span>
+      <span>IA <b>Sem Paciência</b></span>
+    </a>
+    <nav>
+      <a href="#personagens">Personagens</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a class="nav-cta" href="#crie">Crie sua IA</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow"><span></span> Inteligência artificial com personalidade</div>
+      <h1>Pergunte qualquer coisa.<br><em>Só não reclame da resposta.</em></h1>
+      <p class="hero-copy">Escolha quem vai responder. Cada personagem tem uma personalidade diferente — e nenhum deles prometeu ser educado.</p>
+
+      <div class="chat-shell" id="chatShell">
+        <div class="chat-header">
+          <div class="chat-persona">
+            <div class="chat-avatar" id="selectedAvatar">💅</div>
+            <div>
+              <span class="chat-kicker"><i class="online-dot"></i> AO VIVO · CONVERSANDO COM</span>
+              <strong id="selectedName">Sincerona</strong>
+            </div>
+          </div>
+          <div class="chat-header-actions"><button class="new-chat-btn" id="newChatBtn" type="button">nova conversa</button><button class="change-btn" id="changeBtn" type="button">trocar personagem</button></div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <div class="message-row agent-row">
+            <div class="mini-avatar">💅</div>
+            <div class="message agent-message">Manda a pergunta. Só não vem buscar validação disfarçada de conselho.</div>
+          </div>
+        </div>
+
+        <div class="typing-row hidden" id="typingRow">
+          <div class="mini-avatar"><img src="assets/personagens/sincerona.webp" alt="Sincerona"></div>
+          <div class="typing-bubble"><i></i><i></i><i></i></div>
+        </div>
+
+        <form class="chat-composer" id="chatForm">
+          <textarea id="chatInput" maxlength="500" rows="1" placeholder="Pergunte qualquer coisa para a Sincerona..."></textarea>
+          <div class="composer-footer">
+            <div class="status-stack"><span class="chat-status" id="chatStatus">Conectando à Sincerona...</span><span class="daily-quota" id="dailyQuota">⚡ <strong>3</strong> de 3 perguntas restantes hoje</span></div>
+            <div class="composer-actions">
+              <span class="counter" id="counter">0/500</span>
+              <button class="send-btn" id="sendBtn" type="submit" disabled>Enviar <span>→</span></button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="quick">
+        <span>Experimente:</span>
+        <button data-q="Meu ex mandou 'oi, sumido'. O que eu faço?">Meu ex mandou “oi”</button>
+        <button data-q="Tenho R$ 5 mil e quero gastar R$ 4 mil num celular. O que você acha?">Celular de R$ 4 mil</button>
+        <button data-q="Tenho entrevista amanhã e não preparei nada. Dá pra improvisar?">Entrevista amanhã</button>
+      </div>
+      <p class="v4-note"><strong>3 perguntas grátis por dia.</strong> O limite é compartilhado entre todos os personagens e reinicia no dia seguinte. Trocar de personagem ou iniciar uma nova conversa não zera a contagem.</p>
+    </section>
+
+    <section class="characters" id="personagens">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span></span> Escolha seu sofrimento</div>
+          <h2>Seis personalidades.<br>Uma pergunta.</h2>
+        </div>
+        <p>A mesma pergunta pode receber seis respostas completamente diferentes. Escolha um personagem e veja como a mesma pergunta muda completamente de personalidade.</p>
+      </div>
+      <div class="character-grid" id="characterGrid"></div>
+    </section>
+
+    <section class="popular">
+      <div class="section-heading compact">
+        <div>
+          <div class="eyebrow"><span></span> Perguntas que já deram problema</div>
+          <h2>As mais populares</h2>
+        </div>
+      </div>
+      <div class="popular-grid">
+        <article><span>💔</span><p>“Devo voltar com meu ex?”</p><small>Uma pergunta simples. Uma humilhação gratuita.</small></article>
+        <article><span>💰</span><p>“Como ficar rico rápido?”</p><small>A resposta provavelmente começa com “não assim”.</small></article>
+        <article><span>💼</span><p>“Devo pedir demissão?”</p><small>Melhor perguntar antes de mandar o e-mail.</small></article>
+      </div>
+    </section>
+
+    <section class="create" id="crie">
+      <div class="create-glow"></div>
+      <div class="create-content">
+        <div class="eyebrow"><span></span> Em breve</div>
+        <h2>Crie uma IA<br><em>com a sua cara.</em></h2>
+        <p>Escolha nome, humor, sarcasmo, paciência e jeito de falar. Crie uma personalidade única e compartilhe com seus amigos.</p>
+        <button class="create-btn" onclick="alert('Essa função entra na próxima versão 😉')">Quero criar minha IA <span>→</span></button>
+      </div>
+      <div class="personality-preview">
+        <div class="slider-row"><label>Humor</label><div class="fake-slider"><i style="width:92%"></i></div><b>92%</b></div>
+        <div class="slider-row"><label>Ironia</label><div class="fake-slider"><i style="width:86%"></i></div><b>86%</b></div>
+        <div class="slider-row"><label>Paciência</label><div class="fake-slider"><i style="width:18%"></i></div><b>18%</b></div>
+        <div class="mini-chat"><span>🤖</span><p>“Pronto. Criei uma IA tão parecida com você que seus amigos vão parar de responder os dois.”</p></div>
+      </div>
+    </section>
+
+    <section class="how" id="como-funciona">
+      <div class="eyebrow"><span></span> Sem complicação</div>
+      <h2>Como funciona?</h2>
+      <div class="steps">
+        <div><b>01</b><h3>Escolha</h3><p>Escolha a personalidade que vai encarar sua pergunta.</p></div>
+        <div><b>02</b><h3>Pergunte</h3><p>Você tem até 3 perguntas por dia, compartilhadas entre todos os personagens.</p></div>
+        <div><b>03</b><h3>Compartilhe</h3><p>Use o botão embaixo da resposta para copiar ou compartilhar com seus amigos.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <section class="disclaimer" aria-label="Avisos">
+    <p><strong>É humor, não aconselhamento profissional.</strong> Os personagens são fictícios e as respostas podem conter ironia, exagero e opiniões cômicas.</p>
+    <p><strong>Osvaldo Promessa é uma sátira política fictícia.</strong> Não representa, apoia ou imita oficialmente nenhum político, partido ou candidatura real.</p>
+  </section>
+
+  <footer>
+    <div class="brand"><span class="brand-mark">🤖</span><span>IA <b>Sem Paciência</b></span></div>
+    <span>Feito para quem já cansou de respostas certinhas.</span>
+  </footer>
+
+  <script type="module" src="app-v4.js"></script>
+</body>
+</html>
