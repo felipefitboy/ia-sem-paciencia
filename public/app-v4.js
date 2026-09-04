@@ -13,6 +13,8 @@ const RELEVANCE = {
   }
 };
 
+const characterPages = {parcelado:"ze-parcelado.html",cida:"dona-cida.html",ze:"ze-do-boteco.html",sincerona:"sincerona.html",professor:"professor-obvio.html",osvaldo:"osvaldo-promessa.html"};
+
 const characters = [
   {id:"parcelado",name:"Zé Parcelado",icon:"🧢",image:"assets/personagens/parcelado.webp",desc:"Especialista em sobreviver até o próximo boleto.",tags:["sarcasmo","boletos","sobrevivência"],greeting:"Manda a pergunta, meu consagrado. Se der pra resolver sem parcelar a dignidade, já é lucro."},
   {id:"cida",name:"Dona Cida",icon:"👵",image:"assets/personagens/cida.webp",desc:"Mãe brasileira. Dá conselho, bronca e opinião sem ninguém pedir.",tags:["bronca","carinho","mãe"],greeting:"Fala, criatura. E vê se dessa vez você não arruma problema."},
@@ -247,9 +249,9 @@ function renderCharacters(){
       <span class="live-badge">AO VIVO</span>
       <div class="char-portrait"><img src="${c.image}" alt="${c.name}" loading="lazy"></div>
       <div class="char-copy"><h3>${c.name}</h3><p>${c.desc}</p></div>
-      <div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+      <div class="tags">${c.tags.map(t=>`<span>${t}</span>`).join("")}</div><a class="char-profile-link" href="${characterPages[c.id]}">Conheça ${c.name} →</a>
     </article>`).join("");
-  els.grid.querySelectorAll(".character").forEach(card => card.addEventListener("click", () => selectCharacter(card.dataset.id)));
+  els.grid.querySelectorAll(".character").forEach(card => card.addEventListener("click", (e) => { if(e.target.closest(".char-profile-link")) return; selectCharacter(card.dataset.id); }));
 }
 
 function selectCharacter(id){
