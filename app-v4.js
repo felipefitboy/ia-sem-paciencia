@@ -4,7 +4,7 @@ const RELEVANCE = {
   region: REGION_US,
   project: "4e2d30e0-22fa-51f7-b751-ab84cea50a8e",
   agents: {
-    madruga: "e3fb5871-5001-462b-a9ee-e8648554aa59",
+    parcelado: "e3fb5871-5001-462b-a9ee-e8648554aa59",
     cida: "1875b6b7-ef34-48f9-b83b-f86637f4297d",
     ze: "b67b471d-802b-416a-8418-46dcad7b0d5c",
     sincerona: "08d6e949-4073-417e-9da2-41f825ded716",
@@ -14,7 +14,7 @@ const RELEVANCE = {
 };
 
 const characters = [
-  {id:"madruga",name:"Seu Madruga",icon:"🧢",image:"assets/personagens/madruga.webp",desc:"Azarado, quebrado e surpreendentemente filosófico.",tags:["sarcasmo","dinheiro","sobrevivência"],greeting:"Pergunta logo, abençoado. Minha vida já tem boleto demais pra ter suspense."},
+  {id:"parcelado",name:"Zé Parcelado",icon:"🧢",image:"assets/personagens/parcelado.webp",desc:"Especialista em sobreviver até o próximo boleto.",tags:["sarcasmo","boletos","sobrevivência"],greeting:"Manda a pergunta, meu consagrado. Se der pra resolver sem parcelar a dignidade, já é lucro."},
   {id:"cida",name:"Dona Cida",icon:"👵",image:"assets/personagens/cida.webp",desc:"Mãe brasileira. Dá conselho, bronca e opinião sem ninguém pedir.",tags:["bronca","carinho","mãe"],greeting:"Fala, criatura. E vê se dessa vez você não arruma problema."},
   {id:"ze",name:"Zé do Boteco",icon:"🍺",image:"assets/personagens/ze.webp",desc:"Tem uma teoria sobre tudo e provavelmente já contou isso três vezes.",tags:["boteco","conselho","filosofia"],greeting:"Manda a pergunta. Tenho uma teoria sobre isso e provavelmente ninguém pediu."},
   {id:"sincerona",name:"Sincerona",icon:"💅",image:"assets/personagens/sincerona.webp",desc:"Fala a verdade que você já sabia, mas não queria ouvir.",tags:["verdade","zero filtro","direta"],greeting:"Manda a pergunta. Só não vem buscar validação disfarçada de conselho."},
@@ -39,7 +39,8 @@ const els = {
 };
 
 const params = new URLSearchParams(location.search);
-const initialCharacterId = params.get("char");
+const initialCharacterIdRaw = params.get("char");
+const initialCharacterId = initialCharacterIdRaw === "madruga" ? "parcelado" : initialCharacterIdRaw;
 let selected = characters.find(c => c.id === initialCharacterId) || characters.find(c => c.id === "sincerona");
 let agent = null;
 let task = null;
