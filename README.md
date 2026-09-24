@@ -1,3 +1,18 @@
+# IA Sem Paciência — V13 Conteúdo de Valor
+
+Versão focada em corrigir o motivo “Low value content” apontado pelo Google AdSense.
+
+Principais mudanças:
+- página inicial com novas seções editoriais originais;
+- nova página `melhores-respostas.html` com conteúdo próprio dos seis personagens;
+- página Sobre ampliada;
+- links internos reforçados;
+- sitemap atualizado;
+- script do AdSense mantido nas páginas públicas;
+- chat, agentes, limite diário e infraestrutura preservados.
+
+Não solicite nova revisão do AdSense imediatamente após publicar. Aguarde o site ser rastreado novamente e confira o Search Console.
+
 # IA Sem Paciência — V6.9 Worker
 
 Versão preparada para o fluxo atual do Cloudflare Workers com Static Assets.

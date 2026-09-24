@@ -1,7 +1,7 @@
 {
   "name": "ia-sem-paciencia",
   "private": true,
-  "version": "6.9.0",
+  "version": "17.0.0",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev"

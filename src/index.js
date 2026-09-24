@@ -85,6 +85,9 @@ async function quota(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/personagens" || url.pathname === "/personagens/") {
+      return Response.redirect("https://iasempaciencia.com.br/#personagens", 301);
+    }
     if (url.pathname === "/api/quota") return quota(request, env);
     return env.ASSETS.fetch(request);
   },
